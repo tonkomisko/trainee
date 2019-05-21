@@ -1,4 +1,5 @@
 # trainee
 train session
 
-just some more text...
+just some more txt...
+dalsi kusok textu
