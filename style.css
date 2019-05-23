@@ -1,8 +1,9 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     border: 3px solid orange;
-    width: 500px;
+    width: 500px !important;
     margin: 0 auto;
+    background-color: chartreuse !important;
 }
 h1 {
     margin-top: 100px;
@@ -13,3 +14,11 @@ p {
     text-align: center;
     color: rgb(28, 94, 185);
 }
+
+span {
+
+background-color: tomato;
+color: white;
+padding: 5px;
+}
+
