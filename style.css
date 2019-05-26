@@ -16,12 +16,21 @@ p {
 }
 
 span {
-
-background-color: tomato;
-color: white;
-padding: 5px;
+    background-color: tomato;
+    color: white;
+    padding: 5px;
 }
 
 .highlight {
     color: brown
+}
+
+.number_2 {
+    background-color: azure;
+    margin: 1px;
+    width: 100%;
+}
+
+#first {
+    background-color: aqua;
 }
