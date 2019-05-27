@@ -5,20 +5,36 @@ body {
     margin: 0 auto;
     background-color: chartreuse !important;
 }
+
 h1 {
     margin-top: 100px;
     text-shadow: 3px 2px rgb(112, 110, 110);
-  }
+}
 
 p {
     text-align: center;
     color: rgb(28, 94, 185);
 }
 
-span {
-
-background-color: tomato;
-color: white;
-padding: 5px;
+p.number_2 span {
+    background-color: tomato;
+    color: white;
+    padding: 5px;
 }
 
+p.number_2.specific_class span {
+    background: yellow;
+}
+
+p.number_2:not(.specific_class) span {
+    background: brown;
+}
+
+div.button_1 {
+    text-align: center;
+}
+
+
+div.button_2 {
+    text-align: center;
+}
