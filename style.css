@@ -38,3 +38,7 @@ div.button_1 {
 div.button_2 {
     text-align: center;
 }
+
+div.#test_2 {
+    margin-top: 40px;
+}
