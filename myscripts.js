@@ -1,17 +1,25 @@
 
 function toCelsius(f) {
-  //  debugger;
+  debugger;
   return (5 / 9) * (f - 32);
 }
 
 function getWidth(a) {
   debugger;
-  console.log(a);
-  var aval = $(a).css("width");
-  return aval;
+  return $(a).css("width");
 
 }
 
+function setDoubleWidth(b) {
+  debugger;
+  return parseInt(getWidth(b), 10) * 2 + "px";
+}
+
+function setTripleWidth(c) {
+  debugger;
+  return parseInt(c, 10) * 3;
+
+}
 // document.getElementById("demo").innerHTML = toCelsius(77);
 
 // function myCoolFunction() {
@@ -23,20 +31,44 @@ function getWidth(a) {
 //jquery rewrite 
 $(document).ready(function () {
   $("button#test_2").click(function () {
+    var origin_width = getWidth(this);
+    debugger;
     $(this).html("I've just been modified via jQuery.")
       .css({ "color": "orange", "background": "white", "width": "200px" });
- 
-      getWidth(this);
+    debugger;
 
-      // $(this).css({"color": "orange", "background": "white", "width": "200px"});
+    $(this).css({ "width": setDoubleWidth(this) });
+    // $(this).width(parseInt(origin_width,10) * 3);  
+    $(this).width(setTripleWidth(origin_width));
+    
+    // width: function( index, value ) {
+    debugger;
+    $(this).css({"width": setTripleWidth(origin_width) + "px"});
+      
+      
+      // return parseFloat( new_width ) * 2;
+    // },
+    // debugger;
+    // $(this).css("width:").val(aval * 2);
+    // $(this).css({"color": "orange", "background": "white", "width": "200px"});
   });
 });
+
+// newFunction();
+
+// $(document).ready(function(){
+//   $("button").click(function(){
+//     $("input:text").val("Glenn Quagmire");
+//   });
+// });
+
 
 $(document).ready(function () {
   // debugger;
   $("#demo").click(function () {
     // debugger;
     $(this).html(toCelsius(77));
-
   });
 });
+
+
