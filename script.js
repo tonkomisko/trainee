@@ -3,12 +3,20 @@ function toCelsius(fahrenheit) {
 }
 document.getElementById("demo").innerHTML = toCelsius(100);
 
+function getWidth(a) {
+  debugger;
+  console.log(a);
+  var aval = $(a).css("width");
+}
+
 $(document).ready(function () {
   $('#yellow').click(function () {
     $('body').css("background", "yellow");
     debugger;
-    // $(this).css("background", "yellow").css("color", "red");
-    $(this).css({"background": "yellow", "color": "red", "width": });
+    // var bigger = 2 * getWidth(this);
+    var bigger = 2 * $(this).width();
+    $(this).css({"background": "yellow", "color": "red", "width": bigger});
+    // $(this).width(bigger);
 
   });
 
