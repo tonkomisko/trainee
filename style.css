@@ -40,3 +40,19 @@ button {
     height: 50px;
     margin-left: 10px;
 }
+
+.col1 {
+    background: red;
+    border: 5px solid black;
+}
+
+.col2 {
+    background: blue;
+    border: 1px dotted orange
+}
+
+.col3 {
+    background: green;
+    border:  5px double brown;
+}
+
