@@ -3,7 +3,7 @@ body {
     border: 3px solid orange;
     width: 500px !important;
     margin: 0 auto;
-    background-color: chartreuse !important;
+    background-color: chartreuse;
 }
 
 h1 {
@@ -34,7 +34,6 @@ div.button_1 {
     text-align: center;
 }
 
-
 div.button_2 {
     text-align: center;
 }
@@ -42,3 +41,65 @@ div.button_2 {
 button#test_2 {
     margin-top: 40px;
 }
+
+.col1 {
+    background: red;
+    border: 2px solid black;
+}
+
+.col2 {
+    background: blue;
+    border: 2px solid yellow;
+}
+
+.col3 {
+    background: green;
+    border: 2px solid orange;
+}
+
+.col-r {
+    background: red;
+}
+
+.awesome-btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+@media screen and (min-width: 100px) and (max-width: 200px) {
+    .col-r {
+        background-color: pink;
+    }
+}
+div.devices-r {
+    background: yellow;
+    display: block;
+}
+@media screen and (max-width: 500px) {
+    /* div.devices-r{
+        display:block;
+    } */
+    div.devices-r:nth-of-type(2){
+        background: blue;
+    }
+    /* .devices-r:nth-of-type(2){
+        display:none;
+    } */
+}
+
+
+/* @media (min-width: 501px) {
+    .devices-r:nth-of-type(1){
+        display:none;
+    }
+    .devices-r:nth-of-type(2){
+        display:block;
+    }
+    
+} */

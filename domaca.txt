@@ -1,0 +1,7 @@
+do stylu dorobit media query pre rozmer 0 az 100
+zadefiunovat novu classu, ktoru pouzijeme do kazdeho col 1 col 2 col3 
+napr. class r
+modifikovat tuto klasu v media query od  do 100  az 200 aby jej farba bola pink background 
+
+
+najdi classu v bootstrap ktora umoznuje skryvat a zobrazovat elementy pri rozlicnej sirke hidden visible large devices, medium devices

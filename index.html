@@ -1,58 +1,163 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html lang="en">
+<!-- <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> -->
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
     <title>Anton M. Suslik and Peter Gunis for the better future</title>
-    <style>
-        body {
-            width: 200px;
-            background-color: blue;
-        }
-    </style>
-    <script type="text/javascript" src="jquery-3.4.1.min.js"> </script>
+
+  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="jquery-3.4.1.min.js"> </script> -->
 
 </head>
 
 <body>
 
-    <h1 style="text-align: center">This is a Heading</h1>
-    <p>This is a paragraph.</p>
+    <div class="jumbotron text-center">
+        <h1>My First Bootstrap Page</h1>
+        <p>Resize this responsive page to see the effect!</p>
+    </div>
 
-
-    <p>
-        <b>this is new bold text, styled via CSS</b>
-    </p>
-
-    <p class="number_2">
-        Brownie sweet roll tart sugar plum toffee cheesecake gingerbread liquorice. I love dessert dessert muffin sweet
-        liquorice cupcake. I love muffin wafer sweet.
-        Icing <span>bear claw gummi bears</span> bear claw. Sesame snaps oat cake gingerbread bear claw tiramisu. I love
-        I love I love I love tiramisu gummi bears brownie. Sesame snaps I love cotton candy chocolate cake danish I love
-        jujubes.
-        Marzipan brownie croissant lollipop carrot cake gingerbread toffee. Candy canes ice cream sugar plum cake I love
-        soufflé fruitcake wafer tootsie roll. Bonbon marzipan gummi bears.
-    </p>
-
-
-    <div class="button_1">
-        <button type="button" onclick="document.getElementById('test').innerHTML = Date()">
-            Click me, please to display date and time.
-        </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2 col-r">
+                <h3>Column 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+            <div class="col-sm-2 col-r">
+                <h3>Column 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+            <div class="col-sm-2 col-r">
+                <h3>Column 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+        </div>
     </div>
 
 
-    <p id="test"></p>
 
-    <div class="button_2">
-        <button type="button" onclick="myCoolFunction()">
-            Click me to run another cool function.
-        </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col1 col-r">
+                Column 1 xs
+            </div>
+            <div class="col-xs-4 col2 col-r">
+                Column 2 xs
+            </div>
+            <div class="col-xs-2 col3 col-r">
+                Column 3 xs
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col1 col-r">
+                Column 1 sm
+            </div>
+            <div class="col-sm-4 col2 col-r">
+                Column 2 sm
+            </div>
+            <div class="col-sm-2 col3 col-r">
+                Column 3 sm
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 col1 col-r">
+                Column 1 md
+            </div>
+            <div class="col-md-4 col2 col-r">
+                Column 2 md
+            </div>
+            <div class="col-md-2 col3 col-r">
+                Column 3 md
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col1 col-r">
+                Column 1 lg
+            </div>
+            <div class="col-lg-4 col2 col-r">
+                Column 2 lg
+            </div>
+            <div class="col-lg-2 col3 col-r">
+                Column 3 lg
+            </div>
+        </div>
     </div>
-    <div align="center">
-        <button id="test_2">You can't change me!!</button>
+
+    <div>
+        <div class="devices-r">
+            div1 small device
+        </div>
+
+        <div class="devices-r">
+            div2 normal device
+        </div>
     </div>
+
+    <p>Resize this page to see how the text below changes:</p>
+    <h1 class="visible-xs bg-danger">This text is shown only on an EXTRA SMALL screen.</h1>
+    <h1 class="visible-sm bg-info">This text is shown only on a SMALL screen.</h1>
+    <h1 class="visible-md bg-warning">This text is shown only on a MEDIUM screen.</h1>
+    <h1 class="visible-lg bg-success">This text is shown only on a LARGE screen.</h1>
+    <h1 class="hidden-xs bg-danger">This text is NOT shown on a EXTRA SMALL screen.</h1>
+
+    <!-- <button class="butt"></button> -->
+    <button class="btn btn-primary awesome-btn" >Button <i class="fa fa-floppy-o" style="font-size:24px"></i></button>
+
+
+
+    <!-- <div class="container">
+    <div class="row">
+    <div class="col-sm-2"> -->
+    <!-- <h1 style="text-align: center">This is a Heading</h1>
+
+        <p>This is a paragraph.</p>
+
+
+        <p>
+            <b>this is new bold text, styled via CSS</b>
+        </p>
+
+        <p class="number_2">
+            Brownie sweet roll tart sugar plum toffee cheesecake gingerbread liquorice. I love dessert dessert muffin sweet
+            liquorice cupcake. I love muffin wafer sweet.
+            Icing <span>bear claw gummi bears</span> bear claw. Sesame snaps oat cake gingerbread bear claw tiramisu. I love
+            I love I love I love tiramisu gummi bears brownie. Sesame snaps I love cotton candy chocolate cake danish I love
+            jujubes.
+            Marzipan brownie croissant lollipop carrot cake gingerbread toffee. Candy canes ice cream sugar plum cake I love
+            soufflé fruitcake wafer tootsie roll. Bonbon marzipan gummi bears.
+        </p>
+
+
+        <div class="button_1">
+            <button type="button" onclick="document.getElementById('test').innerHTML = Date()">
+                Click me, please to display date and time.
+            </button>
+        </div>
+
+
+        <p id="test"></p>
+
+        <div class="button_2">
+            <button type="button" onclick="myCoolFunction()">
+                Click me to run another cool function.
+            </button>
+        </div>
+        <div align="center">
+            <button id="test_2">You can't change me!!</button>
+        </div> -->
 
 
 
@@ -61,7 +166,7 @@
         <button type></button>
     </div> -->
 
-    <p class="number_2 specific_class">
+    <!-- <p class="number_2 specific_class">
         Brownie sweet roll tart sugar plum toffee cheesecake gingerbread liquorice. I love dessert dessert muffin sweet
         liquorice cupcake. I love muffin wafer sweet.
         Icing <span>bear claw gummi bears</span> bear claw. Sesame snaps oat cake gingerbread bear claw tiramisu. I love
@@ -88,7 +193,7 @@
         <p id="demo">TEST Bla bla</p>
 
 
-    </p>
+    </p> -->
 
     <script src="myscripts.js"></script>
 </body>
