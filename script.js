@@ -85,14 +85,28 @@ $(document).ready(function () {
     var text_alert = $(this).text();
     $("#alert_1").show('fade');
     debugger;
-    $('#msgAlert').text(text_alert);
+    $('.msgAlert').text(text_alert);
+    $('#myModal').modal('show');
   });
 
   $('#linkClose').click(function () {
-    var str = $('#msgAlert').text();
+    var str = $('.msgAlert').text();
     
     $('#alert_1').hide('fade');
     // $('#msgAlert').replace(str,'');
   })
 
+
+
+  // btn modal
+
+  $('#btnShow').click(function() {
+    $('#myModal').modal('show');
+
+  });
+
+  $('#btnHide').click(function() {
+    $('#myModal').modal('hide');
+
+  });
 });
