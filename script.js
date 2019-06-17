@@ -81,7 +81,7 @@ $(document).ready(function () {
     $('#yellow').width(origWidth).css({ "background": "buttonface", "color": "buttontext" });
   });
 
-  $("#p-tag").on("click", ".p-class", function() {
+  $("#p-tag").on("click", ".p-class", function () {
     var text_alert = $(this).text();
     $("#alert_1").show('fade');
     debugger;
@@ -91,7 +91,7 @@ $(document).ready(function () {
 
   $('#linkClose').click(function () {
     var str = $('.msgAlert').text();
-    
+
     $('#alert_1').hide('fade');
     // $('#msgAlert').replace(str,'');
   })
@@ -100,13 +100,67 @@ $(document).ready(function () {
 
   // btn modal
 
-  $('#btnShow').click(function() {
+  $('#btnShow').click(function () {
     $('#myModal').modal('show');
 
   });
 
-  $('#btnHide').click(function() {
+  $('#btnHide').click(function () {
     $('#myModal').modal('hide');
 
+  });
+
+
+  function sortTableData(data,field,way) {
+    // var outputData = [];
+    debugger;
+    if (way = 'asc') {
+      return data.sort((a,b) => (a[field] > b[field]) ? 1 : -1);
+    } else if (way = 'desc') {
+      return data.sort((a,b) => (a[field] < b[field]) ? 1 : -1);
+    }
+    // return outputData;
+  };
+  // table
+
+
+  var tableData = [
+    { id: 1, name: 'John', lastName: 'Doe', email: 'john@example.com	', age: 25324532 },
+    { id: 2, name: 'Mary', lastName: 'Moe', email: 'mary@example.com	', age: 25324532 },
+    { id: 3, name: 'July', lastName: 'Dooley', email: 'john@example.com	', age: 25324532 }
+  ];
+  console.log(tableData);
+  // var res = sortTableData(tableData,fieldID,"desc");
+  debugger;
+  // console.log(res);
+  var allFields = "";
+  
+  function renderTable() {
+    debugger;
+    allFields = "";
+  
+  for (var i = 0; i < tableData.length; i++) {
+    var idField = "<td>" + tableData[i]["id"] + "</td>";
+    var nameField = "<td>" + tableData[i]["name"] + "</td>";
+    var lastNameField = "<td>" + tableData[i]["lastName"] + "</td>";
+    var emailField = "<td>" + tableData[i]["email"] + "</td>";
+    var ageField = "<td>" + tableData[i]["age"] + "</td>";
+    allFields = allFields + "<tr>" + idField + nameField + lastNameField + emailField + ageField + "</tr>";
+
+  // $('#data_table').append("<tr>" + idField + nameField + lastNameField + emailField + ageField + "</tr>");
+  };
+  $('#data_table tbody').html(allFields);
+}
+
+renderTable();
+
+  debugger;
+  // $('#data_table tbody').html(allFields);
+
+  $('#data_table th').click(function(){
+    var fieldID = $(this).attr('id');
+    debugger;
+    var res = sortTableData(tableData,fieldID,"asc");
+    renderTable();
   });
 });
