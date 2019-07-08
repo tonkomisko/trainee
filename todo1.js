@@ -163,8 +163,7 @@ $(document).ready(function () {
     $(document).on('click', '#delAll', function () {
         debugger;
         var isAllChecked = $(this).prop('checked');
-        var table_tr = $("#data_table tbody tr");
-        
+                
         $("#data_table tbody tr input.del-checkbox").prop("checked",isAllChecked);
 
                  
