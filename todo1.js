@@ -155,7 +155,7 @@ $(document).ready(function () {
                 tableData.splice(i, 1);
             }
         }
-        renderTable();
+        
     }
 
 
@@ -163,10 +163,33 @@ $(document).ready(function () {
     $(document).on('click', '#delAll', function () {
         debugger;
         var isAllChecked = $(this).prop('checked');
-                
-        $("#data_table tbody tr input.del-checkbox").prop("checked",isAllChecked);
 
-                 
+        $("#data_table tbody tr input.del-checkbox").prop("checked", isAllChecked);
+
+
+
+    });
+
+    function getChecked() {
+        debugger;
+        var res = [];
+        var rr = $("#data_table tbody tr input.del-checkbox").prop("checked");
+        // var chkBox = $("#data_table tbody tr input.del-checkbox");
+        var checkboxChecked = $("#data_table tbody tr input.del-checkbox:checked").closest('tr');
+        for (var i = 0; i < checkboxChecked.length; i++) {
+            res.push($(checkboxChecked[i]).attr('id'));
+        }
+        return res;
+    }
+
+    $('#delSel').click(function () {
+        debugger;
+        var iter = getChecked();
+
+        for (var i = 0; i < iter.length; i++) {
+            deleteItem(iter[i]);
+        }
+        renderTable();
 
     });
 
