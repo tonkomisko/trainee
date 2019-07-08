@@ -52,7 +52,7 @@ $(document).ready(function () {
     sortTableData(tableData, fieldID, gWay);
     renderTable();
 
-
+    // check if the input is empty and show a modal window. If input is not empty, add the input to the array, and display the new appended table
     $('#add').click(function () {
         debugger;
         var newTitle = $('#item').val();
@@ -77,7 +77,7 @@ $(document).ready(function () {
 
 
     });
-
+    //sort the table
     function sortTableData(data, field, way) {
         debugger;
         if (way == 'asc') {
@@ -96,7 +96,7 @@ $(document).ready(function () {
 
         }
     };
-
+    // sort the table when clicking on the header column names, when clicking again, sort back
     $('#data_table th').click(function () {
         fieldID = $(this).attr('id');
         debugger;
@@ -161,11 +161,11 @@ $(document).ready(function () {
 
 
     $(document).on('click', '#delAll', function () {
-        
+        debugger;
         var isAllChecked = $(this).prop('checked');
         var table_tr = $("#data_table tbody tr");
         
-        $(table_tr).find("input.del-checkbox").prop("checked",isAllChecked);
+        $("#data_table tbody tr input.del-checkbox").prop("checked",isAllChecked);
 
                  
 
