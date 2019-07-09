@@ -178,7 +178,7 @@ $(document).ready(function () {
         var isAllChecked = $(this).prop('checked');
                 
         $("#data_table tbody tr input.del-checkbox").prop("checked",isAllChecked);
-
+        showHideDeleteAll();
                  
 
 
