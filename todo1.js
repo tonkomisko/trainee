@@ -22,12 +22,6 @@ $(document).ready(function () {
     showHideDeleteAll();
 
 
-
-
-
-
-
-
     function maxID() {
         var max = 0;
 
