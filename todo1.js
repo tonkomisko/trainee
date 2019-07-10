@@ -16,10 +16,21 @@ $(document).ready(function () {
         } else {
             $("#delSel").hide();
         }
+        // isSomethingChecked() ? $("#delSel").show() : $("#delSel").hide();
+    };
+
+    function enableDisableShowSelected() {
+        debugger;
+        if (isSomethingChecked()) {
+            $("#showSel").removeAttr('disabled');
+        } else {
+            $("#showSel").attr('disabled',true);
+        }
     };
 
 
     showHideDeleteAll();
+    enableDisableShowSelected();
 
 
     function maxID() {
@@ -179,6 +190,7 @@ $(document).ready(function () {
 
         $("#data_table tbody tr input.del-checkbox").prop("checked", isAllChecked);
         showHideDeleteAll();
+        enableDisableShowSelected();
 
 
 
@@ -205,6 +217,7 @@ $(document).ready(function () {
         }
         renderTable();
         showHideDeleteAll();
+        enableDisableShowSelected();
     });
     
    
@@ -218,13 +231,34 @@ $(document).ready(function () {
         } else {
             return false;
         }
-
+        // return $("#data_table tbody tr input.del-checkbox:checked").length > 0 ? true : false;
     }
 
     $(document).on('click', '.del-checkbox', function () {
         showHideDeleteAll();
+        enableDisableShowSelected();
 
     });
+
+    var shownSelected = false;
+
+    $('#showSel').click(function() {
+        if (shownSelected == false) {
+            $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').hide();
+            $(this).text('Show All');
+            shownSelected = true;
+        } else if (shownSelected == true) {
+            $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').show();
+            $(this).text('Show Selected');
+            shownSelected = false;
+        }
+        
+
+    });
+
+    
+
+    // $("#data_table tbody tr input.del-checkbox:not(':checked')")
 
 
 });
