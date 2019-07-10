@@ -16,10 +16,21 @@ $(document).ready(function () {
         } else {
             $("#delSel").hide();
         }
+        // isSomethingChecked() ? $("#delSel").show() : $("#delSel").hide();
+    };
+
+    function enableDisableShowSelected() {
+        debugger;
+        if (isSomethingChecked()) {
+            $("#showSel").removeAttr('disabled');
+        } else {
+            $("#showSel").attr('disabled',true);
+        }
     };
 
 
     showHideDeleteAll();
+    enableDisableShowSelected();
 
 
     function maxID() {
@@ -176,13 +187,41 @@ $(document).ready(function () {
     $(document).on('click', '#selectAll', function () {
 
         var isAllChecked = $(this).prop('checked');
-                
-        $("#data_table tbody tr input.del-checkbox").prop("checked",isAllChecked);
+
+        $("#data_table tbody tr input.del-checkbox").prop("checked", isAllChecked);
         showHideDeleteAll();
-                 
+        enableDisableShowSelected();
+
 
 
     });
+
+    function getChecked() {
+        debugger;
+        var res = [];
+        var rr = $("#data_table tbody tr input.del-checkbox").prop("checked");
+        // var chkBox = $("#data_table tbody tr input.del-checkbox");
+        var checkboxChecked = $("#data_table tbody tr input.del-checkbox:checked").closest('tr');
+        for (var i = 0; i < checkboxChecked.length; i++) {
+            res.push($(checkboxChecked[i]).attr('id'));
+        }
+        return res;
+    }
+
+    $('#delSel').click(function () {
+        debugger;
+        var iter = getChecked();
+
+        for (var i = 0; i < iter.length; i++) {
+            deleteItem(iter[i]);
+        }
+        renderTable();
+        showHideDeleteAll();
+        enableDisableShowSelected();
+    });
+    
+   
+    
 
     function isSomethingChecked() {
         debugger;
@@ -192,14 +231,34 @@ $(document).ready(function () {
         } else {
             return false;
         }
-
+        // return $("#data_table tbody tr input.del-checkbox:checked").length > 0 ? true : false;
     }
 
     $(document).on('click', '.del-checkbox', function () {
         showHideDeleteAll();
+        enableDisableShowSelected();
 
     });
 
+    var shownSelected = false;
+
+    $('#showSel').click(function() {
+        if (shownSelected == false) {
+            $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').hide();
+            $(this).text('Show All');
+            shownSelected = true;
+        } else if (shownSelected == true) {
+            $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').show();
+            $(this).text('Show Selected');
+            shownSelected = false;
+        }
+        
+
+    });
+
+    
+
+    // $("#data_table tbody tr input.del-checkbox:not(':checked')")
+
 
 });
-
