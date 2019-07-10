@@ -10,13 +10,25 @@ $(document).ready(function () {
 
     unifyIDNumbers();
 
+    function showHideDeleteAll() {
+        if (isSomethingChecked()) {
+            $("#delSel").show();
+        } else {
+            $("#delSel").hide();
+        }
+    };
+
+
+    showHideDeleteAll();
+
+
     function maxID() {
         var max = 0;
 
         for (var i = 0; i < tableData.length; i++) {
             if (tableData[i]["id"] > max) { max = tableData[i]["id"]; }
         }
-        debugger;
+
         return max;
     }
 
@@ -25,7 +37,7 @@ $(document).ready(function () {
     }
 
     function unifyIDNumbers() {
-        debugger;
+
         for (var i = 0; i < tableData.length; i++) {
             tableData[i]["id"] = unifyNumbers(tableData[i]["id"]);
         }
@@ -45,7 +57,7 @@ $(document).ready(function () {
                 + "<button type='button' class='btn btn-primary edit-cls'>" + tableData[i]["actionTwo"] + "</button>" + "</td>";
             allFields = allFields + "<tr id='" + tableData[i]["id"] + "'>" + idField + titleField + actionField + "</tr>";
         };
-        debugger;
+
         $('#data_table tbody').html(allFields);
     }
 
@@ -54,12 +66,12 @@ $(document).ready(function () {
 
     // check if the input is empty and show a modal window. If input is not empty, add the input to the array, and display the new appended table
     $('#add').click(function () {
-        debugger;
+
         var newTitle = $('#item').val();
         if (newTitle == "" || newTitle == undefined) {
             $('#myModal').modal('show');
         } else {
-            debugger;
+
             if (fieldID == 'id') {
                 if (gWay == 'desc') {
                     tableData.unshift({ id: maxID() + 1, title: newTitle, action: 'delete', actionTwo: 'edit' });
@@ -79,7 +91,7 @@ $(document).ready(function () {
     });
     //sort the table
     function sortTableData(data, field, way) {
-        debugger;
+
         if (way == 'asc') {
             if (field == 'id' || field == 'action') {
                 return data.sort((a, b) => (a[field] > b[field]) ? 1 : -1);
@@ -99,7 +111,7 @@ $(document).ready(function () {
     // sort the table when clicking on the header column names, when clicking again, sort back
     $('#data_table th').click(function () {
         fieldID = $(this).attr('id');
-        debugger;
+
 
         if (gWay == '' || gWay == 'desc') {
             gWay = 'asc';
@@ -113,15 +125,17 @@ $(document).ready(function () {
 
 
     $(document).on('click', '.delete-cls', function () {
-        debugger;
+
         var clickID = $(this).closest('tr').attr('id');
         deleteItem(clickID);
+        renderTable();
     });
 
     $(document).on('click', '.edit-cls', function () {
-        debugger;
+
         var clickID = $(this).closest('tr').attr('id');
         $(this).toggleClass("btn-primary btn-success");
+        $(this).text('Save');
 
         var $span = $(this).closest('tr').find('span');
         var $input = $(this).closest('tr').find('input.editTitle');
@@ -149,22 +163,22 @@ $(document).ready(function () {
 
 
     function deleteItem(id) {
-        debugger;
+
         for (var i = 0; i < tableData.length; i++) {
             if (tableData[i]["id"] == id) {
                 tableData.splice(i, 1);
             }
         }
-        
     }
 
 
 
-    $(document).on('click', '#delAll', function () {
-        debugger;
+    $(document).on('click', '#selectAll', function () {
+
         var isAllChecked = $(this).prop('checked');
 
         $("#data_table tbody tr input.del-checkbox").prop("checked", isAllChecked);
+        showHideDeleteAll();
 
 
 
@@ -190,8 +204,28 @@ $(document).ready(function () {
             deleteItem(iter[i]);
         }
         renderTable();
+        showHideDeleteAll();
+    });
+    
+   
+    
+
+    function isSomethingChecked() {
+        debugger;
+        var checkedOrNot = $("#data_table tbody tr input.del-checkbox:checked").length;
+        if (checkedOrNot > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    $(document).on('click', '.del-checkbox', function () {
+        showHideDeleteAll();
 
     });
+
 
 });
 
