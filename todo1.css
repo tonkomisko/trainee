@@ -1,3 +1,8 @@
+body {
+    margin-top: 50px;
+}
+
+
 .edit-cls {
     margin-left: 5px;
 }
@@ -14,6 +19,4 @@
     margin-right: 5px !important;
 }
 
-/* button#delAll {
-    ;
-} */
+
