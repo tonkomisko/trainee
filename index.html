@@ -15,28 +15,30 @@
     <title>TO DO list - revamped</title>
 </head>
 
-<body>
-    <div class="container">
+<body class="main-body" >
+       
+    <div class="container top-container">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <input type="text" name="item" id="item" placeholder="type your new todo item">
+            <input type="text" name="item" id="item" placeholder="type your new todo item...">
             <button type="button" id="add" class="btn btn-primary btn-sm">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
+            <a id="upper-button" class="go-to-the-bottom" href="#lower-button">Go to the bottom</a>
             <br>
 
         </div>
         <div class="col-md-4"></div>
     </div>
 
-    <div class="container">
+    <div class="container lower-container">
         <div class="table-responsive">
             <table class="table" id="data_table">
                 <thead>
                     <tr>
                         <th id="id">ID</th>
-                        <th id="title">title</th>
-                        <th id="action">action</th>
+                        <th id="title">Title</th>
+                        <th id="action">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,14 +47,24 @@
             </table>
             <div class="checkbox">
                 <label><input type="checkbox" value="" id="selectAll">Select all</label>
-                <button type="button" id="delSel" class="btn btn-primary btn-sm">Delete selected</button>
+                <button type="button" id="delSel" class="btn btn-primary btn-sm">Remove selected</button>
+                <button type="button" id="showSel" class="btn btn-primary btn-sm">Show selected</button>
+                <select id = "dropDown" class="selectpicker show-menu-arrow form-control my-drop-down">
+                    <option value="showChecked" >Show Checked</option>
+                    <option value="showUnchecked">Show Unchecked</option>
+                    <option value="showAll" selected="selected">Show All</option>
+                </select>
+                <label><input type="text" name="filter" id="filter-item"  class="form-control" placeholder="Filter items here..." onpaste="pasteFunction()"></label>
             </div>
+
+
             <!-- <div class="delSel"> -->
 
             <!-- </div> -->
         </div>
     </div>
-
+    <!-- <button type="button" class="btn btn primary btn-sm" id="totop">Go to the top</button> -->
+    <a id="lower-button" class="go-to-the-top" href="#item">Go to the top</a>
 
 
 

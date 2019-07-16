@@ -1,8 +1,24 @@
+function triggerChange(id) {
+    debugger;
+    console.log("trigger element by id ", id);
+    var filterItem = $("#" + id).val();
+    console.log(filterItem);
+};
+
+
+function pasteFunction(e) {
+    debugger;
+    var filterId = document.getElementById("filter-item").id;
+    console.log("pasted");
+    triggerChange(filterId);
+}
+
+
 $(document).ready(function () {
     var tableData = [
-        { id: 1, title: 'John', action: 'delete', actionTwo: 'edit' },
-        { id: '5', title: 'Mary', action: 'delete', actionTwo: 'edit' },
-        { id: '02', title: 'July', action: 'delete', actionTwo: 'edit' }
+        { id: 1, title: 'John Jacob Astor', action: 'Delete', actionTwo: 'Edit' },
+        { id: '5', title: 'Mary-a', action: 'Delete', actionTwo: 'Edit' },
+        { id: '02', title: 'July Augustine', action: 'Delete', actionTwo: 'Edit' }
     ];
 
     var gWay = 'asc';
@@ -10,27 +26,76 @@ $(document).ready(function () {
 
     unifyIDNumbers();
 
+    function showTopBottomButtons() {
+        
+        var numOfRows = $("#data_table tbody tr").length;
+        if (numOfRows < 15) {
+            $("#lower-button").hide();
+            $("#upper-button").hide();
+        } else if (numOfRows > 15) {
+            $("#lower-button").fadeIn();
+            $("#upper-button").fadeIn();
+        }
+
+
+    };
+
     function showHideDeleteAll() {
         if (isSomethingChecked()) {
             $("#delSel").show();
         } else {
             $("#delSel").hide();
         }
-        // isSomethingChecked() ? $("#delSel").show() : $("#delSel").hide();
+        
     };
 
     function enableDisableShowSelected() {
-        debugger;
+        
         if (isSomethingChecked()) {
             $("#showSel").removeAttr('disabled');
         } else {
-            $("#showSel").attr('disabled',true);
+            $("#showSel").attr('disabled', true);
         }
     };
 
 
+
+
+
+    function isScrolledIntoView(elem) {
+
+        var docViewTop = $(window).scrollTop();
+        var docViewBottom = docViewTop + $(window).height();
+
+        var elemTop = $(elem).offset().top;
+        var elemBottom = elemTop + $(elem).height();
+
+        return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+    };
+
+
+    
+
+    showTopBottomButtons();
     showHideDeleteAll();
     enableDisableShowSelected();
+    if (isScrolledIntoView("#selectAll") == false) {
+       
+        $("#lower-button").fadeIn();
+        $("#upper-button").fadeIn();
+    } else if (isScrolledIntoView("#selectAll") == true) {
+        $("#lower-button").hide();
+        $("#upper-button").hide();
+    };
+    
+
+
+    setTimeout(function () {
+        processDropdown('select#dropDown');
+    }, 0);
+
+
+
 
 
     function maxID() {
@@ -85,17 +150,18 @@ $(document).ready(function () {
 
             if (fieldID == 'id') {
                 if (gWay == 'desc') {
-                    tableData.unshift({ id: maxID() + 1, title: newTitle, action: 'delete', actionTwo: 'edit' });
+                    tableData.unshift({ id: maxID() + 1, title: newTitle, action: 'delete', actionTwo: 'Edit' });
                 } else if (gWay == 'asc') {
-                    tableData.push({ id: maxID() + 1, title: newTitle, action: 'delete', actionTwo: 'edit' });
+                    tableData.push({ id: maxID() + 1, title: newTitle, action: 'delete', actionTwo: 'Edit' });
                 }
             } else if (fieldID == 'title') {
-                tableData.push({ id: maxID() + 1, title: newTitle, action: 'delete', actionTwo: 'edit' });
+                tableData.push({ id: maxID() + 1, title: newTitle, action: 'delete', actionTwo: 'Edit' });
                 sortTableData(tableData, fieldID, gWay);
             }
 
             $('#item').val('');
             renderTable();
+            isScrolledIntoView(elem);
         }
 
 
@@ -191,13 +257,14 @@ $(document).ready(function () {
         $("#data_table tbody tr input.del-checkbox").prop("checked", isAllChecked);
         showHideDeleteAll();
         enableDisableShowSelected();
+        // enableDisableDropDown();
 
 
 
     });
 
     function getChecked() {
-        debugger;
+        
         var res = [];
         var rr = $("#data_table tbody tr input.del-checkbox").prop("checked");
         // var chkBox = $("#data_table tbody tr input.del-checkbox");
@@ -209,7 +276,7 @@ $(document).ready(function () {
     }
 
     $('#delSel').click(function () {
-        debugger;
+        
         var iter = getChecked();
 
         for (var i = 0; i < iter.length; i++) {
@@ -218,13 +285,15 @@ $(document).ready(function () {
         renderTable();
         showHideDeleteAll();
         enableDisableShowSelected();
+        isScrolledIntoView(elem);
+        // enableDisableDropDown();
     });
-    
-   
-    
+
+
+
 
     function isSomethingChecked() {
-        debugger;
+        
         var checkedOrNot = $("#data_table tbody tr input.del-checkbox:checked").length;
         if (checkedOrNot > 0) {
             return true;
@@ -237,12 +306,13 @@ $(document).ready(function () {
     $(document).on('click', '.del-checkbox', function () {
         showHideDeleteAll();
         enableDisableShowSelected();
+        // enableDisableDropDown();
 
     });
 
     var shownSelected = false;
 
-    $('#showSel').click(function() {
+    $('#showSel').click(function () {
         if (shownSelected == false) {
             $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').hide();
             $(this).text('Show All');
@@ -252,13 +322,43 @@ $(document).ready(function () {
             $(this).text('Show Selected');
             shownSelected = false;
         }
+
+
+    });
+
+
+
+    $('select#dropDown').on('change', function () {
+
+        debugger;
+        processDropdown(this);
         
 
     });
 
-    
+    function processDropdown(scopeD) {
+        debugger;
+        var selectValue = $(scopeD).val();
 
-    // $("#data_table tbody tr input.del-checkbox:not(':checked')")
+        if (selectValue == 'showChecked') {
+            $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').hide();
+            $("#data_table tbody tr input.del-checkbox:checked").closest('tr').show();
+        } else if (selectValue == 'showUnchecked') {
+            $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').show();
+            $("#data_table tbody tr input.del-checkbox:checked").closest('tr').hide();
+        } else if (selectValue == 'showAll') {
+            $("#data_table tbody tr input.del-checkbox").closest('tr').show();
+        }
+    }
+
+    $("#filter-item").on('keyup keypress blur change paste', function (e) {
+        // e.type is the type of event fired
+        debugger;
+        // 
+        triggerChange($(this).attr("id"));
+    });
+
+
 
 
 });
