@@ -3,23 +3,57 @@ function triggerChange(id) {
     console.log("trigger element by id ", id);
     var filterItem = $("#" + id).val();
     console.log(filterItem);
+    var pa = getPassedArray(tableData, filterItem);
+    renderTable(pa);
 };
 
-
-function pasteFunction(e) {
+function getPassedArray (inArray, inSubStr) {
     debugger;
-    var filterId = document.getElementById("filter-item").id;
-    console.log("pasted");
-    triggerChange(filterId);
+    var outArr = [];
+    for (var i = 0; i < inArray.length; i++) {
+        // if (tableData[i]["id"] > max) { max = tableData[i]["id"]; }
+        if (inArray[i]["title"].toLowerCase().indexOf(inSubStr.toLowerCase()) > -1 ) {
+            outArr.push(inArray[i]);
+        }
+    }
+    return outArr;
+
 }
 
 
-$(document).ready(function () {
-    var tableData = [
-        { id: 1, title: 'John Jacob Astor', action: 'Delete', actionTwo: 'Edit' },
-        { id: '5', title: 'Mary-a', action: 'Delete', actionTwo: 'Edit' },
-        { id: '02', title: 'July Augustine', action: 'Delete', actionTwo: 'Edit' }
-    ];
+function pasteFunction(event) {
+    debugger;
+    console.log("pasted");
+    setTimeout(function () {
+        triggerChange(event.id);
+    }, 0);
+}
+
+var tableData = [
+    { id: 1, title: 'John Jacob Astor', action: 'Delete', actionTwo: 'Edit' },
+    { id: '5', title: 'Mary-a', action: 'Delete', actionTwo: 'Edit' },
+    { id: '02', title: 'July Augustine', action: 'Delete', actionTwo: 'Edit' }
+];
+
+function renderTable(inTable) {
+    allFields = "";
+
+    for (var i = 0; i < inTable.length; i++) {
+        var idField = "<td>" + "<input type='checkbox' name='delCheckbox' class= 'del-checkbox'>" + inTable[i]["id"] + "</td>";
+        var titleField = "<td>" + "<span>" + inTable[i]["title"] + "</span>"
+            + "<input class='hidden editTitle' type='text' name='editTitle'  value='" + inTable[i]["title"] + "'>" +
+            "</td>";
+
+        var actionField = "<td>"
+            + "<button type='button' class='btn btn-danger delete-cls'>" + inTable[i]["action"] + "</button>"
+            + "<button type='button' class='btn btn-primary edit-cls'>" + inTable[i]["actionTwo"] + "</button>" + "</td>";
+        allFields = allFields + "<tr id='" + inTable[i]["id"] + "'>" + idField + titleField + actionField + "</tr>";
+    };
+
+    $('#data_table tbody').html(allFields);
+}
+
+$(document).ready(function () {    
 
     var gWay = 'asc';
     var fieldID = 'id';
@@ -119,26 +153,26 @@ $(document).ready(function () {
         }
     }
 
-    function renderTable() {
-        allFields = "";
+    // function renderTable(inTable) {
+    //     allFields = "";
 
-        for (var i = 0; i < tableData.length; i++) {
-            var idField = "<td>" + "<input type='checkbox' name='delCheckbox' class= 'del-checkbox'>" + tableData[i]["id"] + "</td>";
-            var titleField = "<td>" + "<span>" + tableData[i]["title"] + "</span>"
-                + "<input class='hidden editTitle' type='text' name='editTitle'  value='" + tableData[i]["title"] + "'>" +
-                "</td>";
+    //     for (var i = 0; i < inTable.length; i++) {
+    //         var idField = "<td>" + "<input type='checkbox' name='delCheckbox' class= 'del-checkbox'>" + inTable[i]["id"] + "</td>";
+    //         var titleField = "<td>" + "<span>" + inTable[i]["title"] + "</span>"
+    //             + "<input class='hidden editTitle' type='text' name='editTitle'  value='" + inTable[i]["title"] + "'>" +
+    //             "</td>";
 
-            var actionField = "<td>"
-                + "<button type='button' class='btn btn-danger delete-cls'>" + tableData[i]["action"] + "</button>"
-                + "<button type='button' class='btn btn-primary edit-cls'>" + tableData[i]["actionTwo"] + "</button>" + "</td>";
-            allFields = allFields + "<tr id='" + tableData[i]["id"] + "'>" + idField + titleField + actionField + "</tr>";
-        };
+    //         var actionField = "<td>"
+    //             + "<button type='button' class='btn btn-danger delete-cls'>" + inTable[i]["action"] + "</button>"
+    //             + "<button type='button' class='btn btn-primary edit-cls'>" + inTable[i]["actionTwo"] + "</button>" + "</td>";
+    //         allFields = allFields + "<tr id='" + inTable[i]["id"] + "'>" + idField + titleField + actionField + "</tr>";
+    //     };
 
-        $('#data_table tbody').html(allFields);
-    }
+    //     $('#data_table tbody').html(allFields);
+    // }
 
     sortTableData(tableData, fieldID, gWay);
-    renderTable();
+    renderTable(tableData);
 
     // check if the input is empty and show a modal window. If input is not empty, add the input to the array, and display the new appended table
     $('#add').click(function () {
@@ -160,7 +194,7 @@ $(document).ready(function () {
             }
 
             $('#item').val('');
-            renderTable();
+            renderTable(tableData);
             isScrolledIntoView(elem);
         }
 
@@ -197,7 +231,7 @@ $(document).ready(function () {
         }
 
         sortTableData(tableData, fieldID, gWay);
-        renderTable();
+        renderTable(tableData);
     });
 
 
@@ -205,7 +239,7 @@ $(document).ready(function () {
 
         var clickID = $(this).closest('tr').attr('id');
         deleteItem(clickID);
-        renderTable();
+        renderTable(tableData);
     });
 
     $(document).on('click', '.edit-cls', function () {
@@ -235,7 +269,7 @@ $(document).ready(function () {
                 tableData[i]["title"] = newValTitle;
             }
         }
-        renderTable();
+        renderTable(tableData);
     }
 
 
@@ -282,12 +316,15 @@ $(document).ready(function () {
         for (var i = 0; i < iter.length; i++) {
             deleteItem(iter[i]);
         }
-        renderTable();
+        renderTable(tableData);
         showHideDeleteAll();
         enableDisableShowSelected();
         isScrolledIntoView(elem);
         // enableDisableDropDown();
     });
+    
+   
+    
 
 
 
@@ -330,14 +367,14 @@ $(document).ready(function () {
 
     $('select#dropDown').on('change', function () {
 
-        debugger;
+        // debugger;
         processDropdown(this);
         
 
     });
 
     function processDropdown(scopeD) {
-        debugger;
+        // debugger;
         var selectValue = $(scopeD).val();
 
         if (selectValue == 'showChecked') {
@@ -351,9 +388,9 @@ $(document).ready(function () {
         }
     }
 
-    $("#filter-item").on('keyup keypress blur change paste', function (e) {
+    $("#filter-item").on('keyup', function (e) {
         // e.type is the type of event fired
-        debugger;
+        // debugger;
         // 
         triggerChange($(this).attr("id"));
     });
