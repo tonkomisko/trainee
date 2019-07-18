@@ -1,7 +1,7 @@
 function triggerChange(id) {
     debugger;
     console.log("trigger element by id ", id);
-    var filterItem = $("#" + id).val();
+    var filterItem = $("#" + id).val().trim().replace(/\s\s+/g, ' ');
     console.log(filterItem);
     var pa = getPassedArray(tableData, filterItem);
     renderTable(pa);
