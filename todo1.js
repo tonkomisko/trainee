@@ -1,5 +1,20 @@
+/** 
+ Initial data definition into todo list
+ @var {tableData}
+*/
+var tableData = [
+    { id: 1, title: 'John Jacob Astor', action: 'Delete', actionTwo: 'Edit' },
+    { id: '5', title: 'Mary-a', action: 'Delete', actionTwo: 'Edit' },
+    { id: '02', title: 'July Augustine', action: 'Delete', actionTwo: 'Edit' }
+];
+
+/**
+ * @function triggerChange
+ * @param {id}
+ * filters id and related text field based on the input in the filter field
+ */
 function triggerChange(id) {
-    debugger;
+
     console.log("trigger element by id ", id);
     var filterItem = $("#" + id).val().trim().replace(/\s\s+/g, ' ');
     console.log(filterItem);
@@ -7,12 +22,17 @@ function triggerChange(id) {
     renderTable(pa);
 };
 
-function getPassedArray (inArray, inSubStr) {
-    debugger;
+/**
+ * @function getPassedArray
+ * @param {object} inArray - input array
+ * @param {string} inSubstr - part of a title string 
+ */
+function getPassedArray(inArray, inSubStr) {
+
     var outArr = [];
     for (var i = 0; i < inArray.length; i++) {
         // if (tableData[i]["id"] > max) { max = tableData[i]["id"]; }
-        if (inArray[i]["title"].toLowerCase().indexOf(inSubStr.toLowerCase()) > -1 ) {
+        if (inArray[i]["title"].toLowerCase().indexOf(inSubStr.toLowerCase()) > -1) {
             outArr.push(inArray[i]);
         }
     }
@@ -20,21 +40,21 @@ function getPassedArray (inArray, inSubStr) {
 
 }
 
-
+/**
+ * @function pasteFunction
+ * @param {event}
+ */
 function pasteFunction(event) {
-    debugger;
+
     console.log("pasted");
     setTimeout(function () {
         triggerChange(event.id);
     }, 0);
 }
 
-var tableData = [
-    { id: 1, title: 'John Jacob Astor', action: 'Delete', actionTwo: 'Edit' },
-    { id: '5', title: 'Mary-a', action: 'Delete', actionTwo: 'Edit' },
-    { id: '02', title: 'July Augustine', action: 'Delete', actionTwo: 'Edit' }
-];
-
+/**
+ * @function renderTable
+ */
 function renderTable(inTable) {
     allFields = "";
 
@@ -53,125 +73,233 @@ function renderTable(inTable) {
     $('#data_table tbody').html(allFields);
 }
 
-$(document).ready(function () {    
+/**
+ * @function processDropdown
+ * display table rows based on checked/not checked value
+ */
+function processDropdown(scopeD) {
+    // 
+    var selectValue = $(scopeD).val();
+
+    if (selectValue == 'showChecked') {
+        $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').hide();
+        $("#data_table tbody tr input.del-checkbox:checked").closest('tr').show();
+    } else if (selectValue == 'showUnchecked') {
+        $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').show();
+        $("#data_table tbody tr input.del-checkbox:checked").closest('tr').hide();
+    } else if (selectValue == 'showAll') {
+        $("#data_table tbody tr input.del-checkbox").closest('tr').show();
+    }
+}
+
+
+/**
+ * @function isSomethingChecked
+ * 
+ */
+function isSomethingChecked() {
+
+    var checkedOrNot = $("#data_table tbody tr input.del-checkbox:checked").length;
+    if (checkedOrNot > 0) {
+        return true;
+    } else {
+        return false;
+    }
+    // return $("#data_table tbody tr input.del-checkbox:checked").length > 0 ? true : false;
+}
+
+
+/**
+ * @function getChecked
+ */
+function getChecked() {
+
+    var res = [];
+    var rr = $("#data_table tbody tr input.del-checkbox").prop("checked");
+    // var chkBox = $("#data_table tbody tr input.del-checkbox");
+    var checkboxChecked = $("#data_table tbody tr input.del-checkbox:checked").closest('tr');
+    for (var i = 0; i < checkboxChecked.length; i++) {
+        res.push($(checkboxChecked[i]).attr('id'));
+    }
+    return res;
+}
+
+
+/**
+ * @function deleteItem
+ * @param {number} id - id of a row in the data table
+ * @param {object} inTable - input table
+ */
+function deleteItem(id,inTable) {
+
+    for (var i = 0; i < inTable.length; i++) {
+        if (inTable[i]["id"] == id) {
+            inTable.splice(i, 1);
+        }
+    }
+}
+
+
+/**
+ * @function editItem
+ * @param {number} id
+ * @param {string} newValTitle - edited  title value
+ * @param {object} inTable - input table 
+ */
+function editItem(id, newValTitle, inTable) {
+   
+    for (var i = 0; i < inTable.length; i++) {
+        if (inTable[i]["id"] == id) {
+            inTable[i]["title"] = newValTitle;
+        }
+    }
+    renderTable(inTable);
+}
+
+
+/**
+ * @function showTopBottomButtons
+ * 
+ */
+function showTopBottomButtons() {
+
+    var numOfRows = $("#data_table tbody tr").length;
+    if (numOfRows < 15) {
+        $("#lower-button").hide();
+        $("#upper-button").hide();
+    } else if (numOfRows > 15) {
+        $("#lower-button").fadeIn();
+        $("#upper-button").fadeIn();
+    }
+
+
+};
+
+/**
+* @function showHideDeleteAll
+*/
+function showHideDeleteAll() {
+    if (isSomethingChecked()) {
+        $("#delSel").show();
+    } else {
+        $("#delSel").hide();
+    }
+
+};
+
+/**
+* @function enableDisableShowSelected
+*/
+function enableDisableShowSelected() {
+
+    if (isSomethingChecked()) {
+        $("#showSel").removeAttr('disabled');
+    } else {
+        $("#showSel").attr('disabled', true);
+    }
+};
+
+
+/**
+* @function isScrolledIntoView
+* @param {string} elem - string selector - check if the string selector is visible - 
+*/
+function isScrolledIntoView(elem) {
+
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+};
+
+
+
+/**
+ * @function maxID
+ */
+function maxID() {
+    var max = 0;
+
+    for (var i = 0; i < tableData.length; i++) {
+        if (tableData[i]["id"] > max) { max = tableData[i]["id"]; }
+    }
+
+    return max;
+}
+
+/**
+* @function unifyNumbers
+* @param {number} num
+*/
+function unifyNumbers(num) {
+    return Number(num);
+}
+
+/**
+* @function unifyIDNumbers
+*/
+function unifyIDNumbers() {
+
+    for (var i = 0; i < tableData.length; i++) {
+        tableData[i]["id"] = unifyNumbers(tableData[i]["id"]);
+    }
+}
+
+
+/**
+ * @function sortTableData
+ * @param {object} data - data table
+ * @param {number} field - field from the input table
+ * @param {string} way - ascending or descending
+ */
+function sortTableData(data, field, way) {
+
+    if (way == 'asc') {
+        if (field == 'id' || field == 'action') {
+            return data.sort((a, b) => (a[field] > b[field]) ? 1 : -1);
+        } else if (field == 'title') {
+            return data.sort((a, b) => (a[field].toLowerCase() > b[field].toLowerCase()) ? 1 : -1);
+        }
+
+    } else if (way == 'desc') {
+        if (field == 'id' || field == 'action') {
+            return data.sort((a, b) => (a[field] < b[field]) ? 1 : -1);
+        } else if (field == 'title') {
+            return data.sort((a, b) => (a[field].toLowerCase() < b[field].toLowerCase()) ? 1 : -1);
+        }
+
+    }
+};
+
+
+
+$(document).ready(function () {
 
     var gWay = 'asc';
     var fieldID = 'id';
 
     unifyIDNumbers();
-
-    function showTopBottomButtons() {
-        
-        var numOfRows = $("#data_table tbody tr").length;
-        if (numOfRows < 15) {
-            $("#lower-button").hide();
-            $("#upper-button").hide();
-        } else if (numOfRows > 15) {
-            $("#lower-button").fadeIn();
-            $("#upper-button").fadeIn();
-        }
-
-
-    };
-
-    function showHideDeleteAll() {
-        if (isSomethingChecked()) {
-            $("#delSel").show();
-        } else {
-            $("#delSel").hide();
-        }
-        
-    };
-
-    function enableDisableShowSelected() {
-        
-        if (isSomethingChecked()) {
-            $("#showSel").removeAttr('disabled');
-        } else {
-            $("#showSel").attr('disabled', true);
-        }
-    };
-
-
-
-
-
-    function isScrolledIntoView(elem) {
-
-        var docViewTop = $(window).scrollTop();
-        var docViewBottom = docViewTop + $(window).height();
-
-        var elemTop = $(elem).offset().top;
-        var elemBottom = elemTop + $(elem).height();
-
-        return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-    };
-
-
-    
-
     showTopBottomButtons();
     showHideDeleteAll();
     enableDisableShowSelected();
+    sortTableData(tableData, fieldID, gWay);
+
     if (isScrolledIntoView("#selectAll") == false) {
-       
+
         $("#lower-button").fadeIn();
         $("#upper-button").fadeIn();
     } else if (isScrolledIntoView("#selectAll") == true) {
         $("#lower-button").hide();
         $("#upper-button").hide();
     };
-    
-
 
     setTimeout(function () {
         processDropdown('select#dropDown');
     }, 0);
 
-
-
-
-
-    function maxID() {
-        var max = 0;
-
-        for (var i = 0; i < tableData.length; i++) {
-            if (tableData[i]["id"] > max) { max = tableData[i]["id"]; }
-        }
-
-        return max;
-    }
-
-    function unifyNumbers(num) {
-        return Number(num);
-    }
-
-    function unifyIDNumbers() {
-
-        for (var i = 0; i < tableData.length; i++) {
-            tableData[i]["id"] = unifyNumbers(tableData[i]["id"]);
-        }
-    }
-
-    // function renderTable(inTable) {
-    //     allFields = "";
-
-    //     for (var i = 0; i < inTable.length; i++) {
-    //         var idField = "<td>" + "<input type='checkbox' name='delCheckbox' class= 'del-checkbox'>" + inTable[i]["id"] + "</td>";
-    //         var titleField = "<td>" + "<span>" + inTable[i]["title"] + "</span>"
-    //             + "<input class='hidden editTitle' type='text' name='editTitle'  value='" + inTable[i]["title"] + "'>" +
-    //             "</td>";
-
-    //         var actionField = "<td>"
-    //             + "<button type='button' class='btn btn-danger delete-cls'>" + inTable[i]["action"] + "</button>"
-    //             + "<button type='button' class='btn btn-primary edit-cls'>" + inTable[i]["actionTwo"] + "</button>" + "</td>";
-    //         allFields = allFields + "<tr id='" + inTable[i]["id"] + "'>" + idField + titleField + actionField + "</tr>";
-    //     };
-
-    //     $('#data_table tbody').html(allFields);
-    // }
-
-    sortTableData(tableData, fieldID, gWay);
     renderTable(tableData);
 
     // check if the input is empty and show a modal window. If input is not empty, add the input to the array, and display the new appended table
@@ -195,35 +323,24 @@ $(document).ready(function () {
 
             $('#item').val('');
             renderTable(tableData);
-            isScrolledIntoView(elem);
+            if (isScrolledIntoView("#selectAll") == false) {
+
+                $("#lower-button").fadeIn();
+                $("#upper-button").fadeIn();
+            } else if (isScrolledIntoView("#selectAll") == true) {
+                $("#lower-button").hide();
+                $("#upper-button").hide();
+            };
+
+
         }
-
-
     });
-    //sort the table
-    function sortTableData(data, field, way) {
 
-        if (way == 'asc') {
-            if (field == 'id' || field == 'action') {
-                return data.sort((a, b) => (a[field] > b[field]) ? 1 : -1);
-            } else if (field == 'title') {
-                return data.sort((a, b) => (a[field].toLowerCase() > b[field].toLowerCase()) ? 1 : -1);
-            }
 
-        } else if (way == 'desc') {
-            if (field == 'id' || field == 'action') {
-                return data.sort((a, b) => (a[field] < b[field]) ? 1 : -1);
-            } else if (field == 'title') {
-                return data.sort((a, b) => (a[field].toLowerCase() < b[field].toLowerCase()) ? 1 : -1);
-            }
 
-        }
-    };
     // sort the table when clicking on the header column names, when clicking again, sort back
     $('#data_table th').click(function () {
         fieldID = $(this).attr('id');
-
-
         if (gWay == '' || gWay == 'desc') {
             gWay = 'asc';
         } else {
@@ -238,7 +355,7 @@ $(document).ready(function () {
     $(document).on('click', '.delete-cls', function () {
 
         var clickID = $(this).closest('tr').attr('id');
-        deleteItem(clickID);
+        deleteItem(clickID,tableData);
         renderTable(tableData);
     });
 
@@ -254,35 +371,12 @@ $(document).ready(function () {
         $input.toggleClass("hidden");
 
         if ($input.hasClass("hidden")) {
-            editItem(clickID, $input.val());
+            editItem(clickID, $input.val(),tableData);
         }
 
     });
 
-    function testSave(id, value) {
-        console.log(id, value);
-    }
-
-    function editItem(id, newValTitle) {
-        for (var i = 0; i < tableData.length; i++) {
-            if (tableData[i]["id"] == id) {
-                tableData[i]["title"] = newValTitle;
-            }
-        }
-        renderTable(tableData);
-    }
-
-
-    function deleteItem(id) {
-
-        for (var i = 0; i < tableData.length; i++) {
-            if (tableData[i]["id"] == id) {
-                tableData.splice(i, 1);
-            }
-        }
-    }
-
-
+   
 
     $(document).on('click', '#selectAll', function () {
 
@@ -291,60 +385,34 @@ $(document).ready(function () {
         $("#data_table tbody tr input.del-checkbox").prop("checked", isAllChecked);
         showHideDeleteAll();
         enableDisableShowSelected();
-        // enableDisableDropDown();
-
-
 
     });
 
-    function getChecked() {
-        
-        var res = [];
-        var rr = $("#data_table tbody tr input.del-checkbox").prop("checked");
-        // var chkBox = $("#data_table tbody tr input.del-checkbox");
-        var checkboxChecked = $("#data_table tbody tr input.del-checkbox:checked").closest('tr');
-        for (var i = 0; i < checkboxChecked.length; i++) {
-            res.push($(checkboxChecked[i]).attr('id'));
-        }
-        return res;
-    }
 
     $('#delSel').click(function () {
-        
+
         var iter = getChecked();
 
         for (var i = 0; i < iter.length; i++) {
-            deleteItem(iter[i]);
+            deleteItem(iter[i], tableData);
         }
         renderTable(tableData);
         showHideDeleteAll();
         enableDisableShowSelected();
-        isScrolledIntoView(elem);
-        // enableDisableDropDown();
+        if (isScrolledIntoView("#selectAll") == false) {
+
+            $("#lower-button").fadeIn();
+            $("#upper-button").fadeIn();
+        } else if (isScrolledIntoView("#selectAll") == true) {
+            $("#lower-button").hide();
+            $("#upper-button").hide();
+        };
+
     });
-    
-   
-    
-
-
-
-
-    function isSomethingChecked() {
-        
-        var checkedOrNot = $("#data_table tbody tr input.del-checkbox:checked").length;
-        if (checkedOrNot > 0) {
-            return true;
-        } else {
-            return false;
-        }
-        // return $("#data_table tbody tr input.del-checkbox:checked").length > 0 ? true : false;
-    }
 
     $(document).on('click', '.del-checkbox', function () {
         showHideDeleteAll();
         enableDisableShowSelected();
-        // enableDisableDropDown();
-
     });
 
     var shownSelected = false;
@@ -360,42 +428,14 @@ $(document).ready(function () {
             shownSelected = false;
         }
 
-
     });
-
-
 
     $('select#dropDown').on('change', function () {
-
-        // debugger;
         processDropdown(this);
-        
-
     });
-
-    function processDropdown(scopeD) {
-        // debugger;
-        var selectValue = $(scopeD).val();
-
-        if (selectValue == 'showChecked') {
-            $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').hide();
-            $("#data_table tbody tr input.del-checkbox:checked").closest('tr').show();
-        } else if (selectValue == 'showUnchecked') {
-            $("#data_table tbody tr input.del-checkbox").not(':checked').closest('tr').show();
-            $("#data_table tbody tr input.del-checkbox:checked").closest('tr').hide();
-        } else if (selectValue == 'showAll') {
-            $("#data_table tbody tr input.del-checkbox").closest('tr').show();
-        }
-    }
 
     $("#filter-item").on('keyup', function (e) {
-        // e.type is the type of event fired
-        // debugger;
-        // 
         triggerChange($(this).attr("id"));
     });
-
-
-
 
 });
