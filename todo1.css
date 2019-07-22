@@ -35,27 +35,11 @@ select#dropDown.form-control.my-drop-down {
 }
 
 body.main-body {
-    /* background-repeat: repeat; */
-    /* background: #007991; */
-    /* fallback for old browsers */
-    /* background: -webkit-linear-gradient(to bottom, #78ffd6, #007991); */
-    /* Chrome 10-25, Safari 5.1-6 */
-    /* background: linear-gradient(to bottom, #78ffd6, #007991); */
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-repeat: repeat;
-    background: #C33764;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #1D2671, #C33764);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #1D2671, #C33764);
-    /* royal */
     background: #141E30;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #243B55, #141E30);
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #243B55, #141E30);
-    
-    
     background: #2980b9;
     /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
@@ -69,6 +53,12 @@ body.main-body {
 
 .container.top-container {
     margin-top: 170px;
+    /* box-shadow: 7px 9px 15px -2px rgba(0, 0, 0, 0.75); */
+    /* border-radius: 10px 10px 10px 10px; */
+}
+
+input#item {
+    box-shadow: 7px 9px 15px -2px rgba(0, 0, 0, 0.75);
 }
 
 .container.lower-container {
@@ -120,17 +110,13 @@ a.go-to-the-bottom:hover, :focus {
     text-decoration: none;
 }
 
-/* button.btn.btn-danger.delete-cls { */
 
-/*  */
-
-/* background: #EA2775; */
-
-/* color: whitesmoke; */
-
-}
 
 button.btn.btn-danger.edit-cls {
     background: #4F7CAC;
     color: whitesmoke;
+}
+
+button#add.btn.btn-primary {
+    box-shadow: 7px 9px 15px -2px rgba(0, 0, 0, 0.75);
 }
