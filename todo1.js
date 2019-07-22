@@ -24,6 +24,8 @@ function triggerChange(id) {
 
 /**
  * @function getPassedArray
+ * @param {object} inArray - input array
+ * @param {string} inSubstr - part of a title string 
  */
 function getPassedArray(inArray, inSubStr) {
 
@@ -125,13 +127,14 @@ function getChecked() {
 
 /**
  * @function deleteItem
- * @param {id}
+ * @param {number} id - id of a row in the data table
+ * @param {object} inTable - input table
  */
-function deleteItem(id) {
+function deleteItem(id,inTable) {
 
-    for (var i = 0; i < tableData.length; i++) {
-        if (tableData[i]["id"] == id) {
-            tableData.splice(i, 1);
+    for (var i = 0; i < inTable.length; i++) {
+        if (inTable[i]["id"] == id) {
+            inTable.splice(i, 1);
         }
     }
 }
@@ -139,14 +142,18 @@ function deleteItem(id) {
 
 /**
  * @function editItem
+ * @param {number} id
+ * @param {string} newValTitle - edited  title value
+ * @param {object} inTable - input table 
  */
-function editItem(id, newValTitle) {
-    for (var i = 0; i < tableData.length; i++) {
-        if (tableData[i]["id"] == id) {
-            tableData[i]["title"] = newValTitle;
+function editItem(id, newValTitle, inTable) {
+   
+    for (var i = 0; i < inTable.length; i++) {
+        if (inTable[i]["id"] == id) {
+            inTable[i]["title"] = newValTitle;
         }
     }
-    renderTable(tableData);
+    renderTable(inTable);
 }
 
 
@@ -195,7 +202,7 @@ function enableDisableShowSelected() {
 
 /**
 * @function isScrolledIntoView
-* @param {elem}
+* @param {string} elem - string selector - check if the string selector is visible - 
 */
 function isScrolledIntoView(elem) {
 
@@ -225,7 +232,7 @@ function maxID() {
 
 /**
 * @function unifyNumbers
-* @param {num}
+* @param {number} num
 */
 function unifyNumbers(num) {
     return Number(num);
@@ -244,6 +251,9 @@ function unifyIDNumbers() {
 
 /**
  * @function sortTableData
+ * @param {object} data - data table
+ * @param {number} field - field from the input table
+ * @param {string} way - ascending or descending
  */
 function sortTableData(data, field, way) {
 
@@ -345,7 +355,7 @@ $(document).ready(function () {
     $(document).on('click', '.delete-cls', function () {
 
         var clickID = $(this).closest('tr').attr('id');
-        deleteItem(clickID);
+        deleteItem(clickID,tableData);
         renderTable(tableData);
     });
 
@@ -361,14 +371,12 @@ $(document).ready(function () {
         $input.toggleClass("hidden");
 
         if ($input.hasClass("hidden")) {
-            editItem(clickID, $input.val());
+            editItem(clickID, $input.val(),tableData);
         }
 
     });
 
-    function testSave(id, value) {
-        console.log(id, value);
-    }
+   
 
     $(document).on('click', '#selectAll', function () {
 
@@ -386,7 +394,7 @@ $(document).ready(function () {
         var iter = getChecked();
 
         for (var i = 0; i < iter.length; i++) {
-            deleteItem(iter[i]);
+            deleteItem(iter[i], tableData);
         }
         renderTable(tableData);
         showHideDeleteAll();
