@@ -1,3 +1,5 @@
+
+
 function triggerChange(id) {
     debugger;
     console.log("trigger element by id ", id);
@@ -5,7 +7,7 @@ function triggerChange(id) {
     console.log(filterItem);
     var pa = getPassedArray(tableData, filterItem);
     renderTable(pa);
-};
+}
 
 function getPassedArray (inArray, inSubStr) {
     debugger;
@@ -20,6 +22,11 @@ function getPassedArray (inArray, inSubStr) {
 
 }
 
+/**
+ * 
+ * @param {} event 
+ * @function {pasteFunction}
+ */
 
 function pasteFunction(event) {
     debugger;
@@ -29,12 +36,19 @@ function pasteFunction(event) {
     }, 0);
 }
 
+
+
 var tableData = [
     { id: 1, title: 'John Jacob Astor', action: 'Delete', actionTwo: 'Edit' },
     { id: '5', title: 'Mary-a', action: 'Delete', actionTwo: 'Edit' },
     { id: '02', title: 'July Augustine', action: 'Delete', actionTwo: 'Edit' }
 ];
 
+/**
+ * @description rendering the table
+ *
+ * @param {*} inTable - array of objects, contains data for table
+ */
 function renderTable(inTable) {
     allFields = "";
 
@@ -53,8 +67,10 @@ function renderTable(inTable) {
     $('#data_table tbody').html(allFields);
 }
 
-$(document).ready(function () {    
 
+
+$(document).ready(function () {  
+    
     var gWay = 'asc';
     var fieldID = 'id';
 
