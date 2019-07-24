@@ -1,4 +1,4 @@
-import {tableData} from './source.js';
+import {tableData, loadResource} from './source.js';
 import {
     triggerChange,
     deleteItem,
@@ -17,7 +17,16 @@ import {
 
 
 $(document).ready(function () {
-
+    $.ajax({
+        url: 'data.json',
+        async: false,
+        dataType: 'json',
+        success: function (response) {
+        debugger; 
+        }
+      });
+    
+    loadResource();
     var gWay = 'asc';
     var fieldID = 'id';
 
