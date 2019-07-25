@@ -1,4 +1,4 @@
-import { tableData } from './source.js';
+import { tableData, loadDataM } from './source.js';
 import {
     triggerChange,
     deleteItem,
@@ -16,19 +16,8 @@ import {
 } from './utilities.js';
 
 $(document).ready(function () {
-    // jqxhr.complete(function() {
-    //     debugger;
-    //     console.log("jqxhr second complete" );
-    //   });
-    $.getJSON("data.json", function (data) {
-        debugger;
-        console.log("success", data);
-        tableData.push(...data);
-        // tableData.push({id: '03', title: 'Janko Hrasko', action: 'Delete', actionTwo: 'Edit' });
-
-    }).done(function () {
-        console.log("second success");
-        // });
+    loadDataM.done(function (data,status) {
+        console.log("second call from todo1.js");
 
         var gWay = 'asc';
         var fieldID = 'id';
@@ -190,5 +179,9 @@ $(document).ready(function () {
             triggerChange($(this).attr("id"), tableData);
         });
 
+    }).fail(function (data, status, errorThrown) {
+        console.log('getJSON request failed! ' + status);
+    }).always(function (data, status) {
+        console.log('always executed');
     });
 });
