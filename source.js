@@ -4,6 +4,14 @@ import {localDataStorage} from './localDataStorage.js';
  Initial data definition into todo list
  @var {tableData}
 */
+$.ajax({
+    url: 'data.json',
+    async: false,
+    dataType: 'json',
+    success: function (response) {
+    debugger; 
+    }
+  });
 
 export const tableData = [{ "id": "21", "title": "Janko Hrasko", "action": "Delete", "actionTwo": "Edit" }];
 
