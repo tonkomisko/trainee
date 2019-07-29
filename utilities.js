@@ -258,3 +258,4 @@ export function sortTableData(data, field, way) {
 
     }
 };
+

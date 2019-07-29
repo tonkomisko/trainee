@@ -1,5 +1,5 @@
 import { tableData, loadDataM } from './source.js';
-import {localDataStorage} from './localDataStorage.js';
+import { localDataStorage } from './localDataStorage.js';
 import {
     triggerChange,
     deleteItem,
@@ -17,7 +17,10 @@ import {
 } from './utilities.js';
 
 $(document).ready(function () {
-    loadDataM.done(function (data,status) {
+    $('#todo_page').hide();
+    $('#login_page').show();
+
+    loadDataM.done(function (data, status) {
         debugger;
         console.log("second call from todo1.js");
         var getLocalData = localDataStorage.get('localData');
@@ -130,6 +133,18 @@ $(document).ready(function () {
             enableDisableShowSelected();
 
         });
+
+        $("#login_page_btn").click(function(){
+            $('#todo_page').hide();
+            $('#login_page').show();
+        });
+
+        $("#todo_page_btn").click(function(){
+            $('#todo_page').show();
+            $('#login_page').hide();
+        });
+
+
 
 
         $('#delSel').click(function () {
