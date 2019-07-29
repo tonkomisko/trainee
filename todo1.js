@@ -1,4 +1,5 @@
 import { tableData, loadDataM } from './source.js';
+import { credentials } from './credentials.js';
 import { localDataStorage } from './localDataStorage.js';
 import {
     triggerChange,
@@ -17,8 +18,32 @@ import {
 } from './utilities.js';
 
 $(document).ready(function () {
-    $('#todo_page').hide();
-    $('#login_page').show();
+    debugger;
+    if (localDataStorage.get('user')) {
+        debugger;
+        $('#todo_page').show();
+        $('#login_page').hide();
+    } else {
+        $('#todo_page').hide();
+        $('#login_page').show();
+    }
+
+    $('#logoutBtn').click(function () {
+        localDataStorage.remove('user');
+        $('#todo_page').hide();
+        $('#login_page').show();
+    });
+
+
+    $('#loginBtn').click(function () {
+        debugger;
+        if ($('#email').val() == credentials.email && $('#pwd').val() == credentials.password) {
+            $('#todo_page').show();
+            $('#login_page').hide();
+            localDataStorage.set('user', credentials.email);
+        }
+    });
+
 
     loadDataM.done(function (data, status) {
         debugger;
@@ -134,12 +159,12 @@ $(document).ready(function () {
 
         });
 
-        $("#login_page_btn").click(function(){
+        $("#login_page_btn").click(function () {
             $('#todo_page').hide();
             $('#login_page').show();
         });
 
-        $("#todo_page_btn").click(function(){
+        $("#todo_page_btn").click(function () {
             $('#todo_page').show();
             $('#login_page').hide();
         });
