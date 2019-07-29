@@ -1,5 +1,5 @@
 // import {$,jQuery} from 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js';
-
+import {localDataStorage} from './localDataStorage.js';
 /** 
  Initial data definition into todo list
  @var {tableData}
@@ -27,6 +27,9 @@ export var loadDataM = $.getJSON('data.json', function(data, status) {
     }    
     console.log('First call from source.js');
     tableData.push(...data);
+    debugger;
+    // localStorage.setItem('localData', tableData);
+    localDataStorage.set('localData', tableData);
  });
 
 // export var jqxhr = $.getJSON( "data.json", function() {

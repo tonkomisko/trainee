@@ -15,61 +15,72 @@
     <title>TO DO list - revamped</title>
 </head>
 
-<body class="main-body" >
-       
-    <div class="container top-container">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <input type="text" name="item" id="item" placeholder=" type your new todo item...">
-            <button type="button" id="add" class="btn btn-primary btn-sm">
-                <span class="glyphicon glyphicon-plus"></span>
-            </button>
-            <a id="upper-button" class="go-to-the-bottom" href="#lower-button">Go to the bottom</a>
-            <br>
-
-        </div>
-        <div class="col-md-4"></div>
+<body class="main-body">
+    <div id="login_page">
+        <p id="div1"></p>
+        <script>
+            $("#div1").load("./janko.html");
+        </script>
     </div>
 
-    <div class="container lower-container">
-        <div class="table-responsive">
-            <table class="table" id="data_table">
-                <thead>
-                    <tr>
-                        <th id="id">ID</th>
-                        <th id="title">Title</th>
-                        <th id="action">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <div id="todo_page">
 
-                </tbody>
-            </table>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" id="selectAll">Select all</label>
-                <button type="button" id="delSel" class="btn btn-primary btn-sm">Remove selected</button>
-                <button type="button" id="showSel" class="btn btn-primary btn-sm">Show selected</button>
-                <select id = "dropDown" class="selectpicker show-menu-arrow form-control my-drop-down">
-                    <option value="showChecked" >Show Checked</option>
-                    <option value="showUnchecked">Show Unchecked</option>
-                    <option value="showAll" selected="selected">Show All</option>
-                </select>
-                <label><input type="text" name="filter" id="filter-item"  class="form-control" placeholder="Filter items here..." onpaste="pasteFunction(this)"></label>
+        <div class="container top-container">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <input type="text" name="item" id="item" placeholder=" type your new todo item...">
+                <button type="button" id="add" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <a id="upper-button" class="go-to-the-bottom" href="#lower-button">Go to the bottom</a>
+                <br>
+
             </div>
-
-
-            <!-- <div class="delSel"> -->
-
-            <!-- </div> -->
+            <div class="col-md-4"></div>
         </div>
+
+        <div class="container lower-container">
+            <div class="table-responsive">
+                <table class="table" id="data_table">
+                    <thead>
+                        <tr>
+                            <th id="id">ID</th>
+                            <th id="title">Title</th>
+                            <th id="action">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" id="selectAll">Select all</label>
+                    <button type="button" id="delSel" class="btn btn-primary btn-sm">Remove selected</button>
+                    <button type="button" id="showSel" class="btn btn-primary btn-sm">Show selected</button>
+                    <select id="dropDown" class="selectpicker show-menu-arrow form-control my-drop-down">
+                        <option value="showChecked">Show Checked</option>
+                        <option value="showUnchecked">Show Unchecked</option>
+                        <option value="showAll" selected="selected">Show All</option>
+                    </select>
+                    <label><input type="text" name="filter" id="filter-item" class="form-control"
+                            placeholder="Filter items here..." onpaste="pasteFunction(this)"></label>
+                </div>
+
+
+                <!-- <div class="delSel"> -->
+
+                <!-- </div> -->
+            </div>
+        </div>
+        <!-- <button type="button" class="btn btn primary btn-sm" id="totop">Go to the top</button> -->
+        <a id="lower-button" class="go-to-the-top" href="#item">Go to the top</a>
+
+
     </div>
-    <!-- <button type="button" class="btn btn primary btn-sm" id="totop">Go to the top</button> -->
-    <a id="lower-button" class="go-to-the-top" href="#item">Go to the top</a>
-
-
 
     <!-- <script src="utilities.js"></script> -->
     <script type="module" src="todo1.js"></script>
+
 </body>
 
 </html>
