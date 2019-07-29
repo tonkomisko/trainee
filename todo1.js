@@ -1,4 +1,5 @@
 import { tableData, loadDataM } from './source.js';
+import {localDataStorage} from './localDataStorage.js';
 import {
     triggerChange,
     deleteItem,
@@ -17,8 +18,9 @@ import {
 
 $(document).ready(function () {
     loadDataM.done(function (data,status) {
+        debugger;
         console.log("second call from todo1.js");
-
+        var getLocalData = localDataStorage.get('localData');
         var gWay = 'asc';
         var fieldID = 'id';
 
