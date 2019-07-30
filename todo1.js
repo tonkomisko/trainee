@@ -38,8 +38,19 @@ $(document).ready(function () {
         if ($('#email').val() == credentials.email && $('#pwd').val() == credentials.password) {
             showToDo();
             localDataStorage.set('user', credentials.email);
+            $('#email, #pwd').val('');            
+        } else {
+            $('.alert').show();
         }
+
+
     });
+
+    $('button.close').click(function () {
+        $('.alert').hide();
+    });
+
+
 
 
     loadDataM.done(function (data, status) {
@@ -155,13 +166,13 @@ $(document).ready(function () {
 
         });
 
-        $("#login_page_btn").click(function () {
-            showLogin();
-        });
+        // $("#login_page_btn").click(function () {
+        //     showLogin();
+        // });
 
-        $("#todo_page_btn").click(function () {
-            showToDo();
-        });
+        // $("#todo_page_btn").click(function () {
+        //     showToDo();
+        // });
 
 
 
