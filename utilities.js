@@ -257,5 +257,15 @@ export function sortTableData(data, field, way) {
         }
 
     }
-};
+}
+
+export function showLogin() {
+    $('#todo_page').hide();
+    $('#login_page').show();
+}
+
+export function showToDo() {
+    $('#todo_page').show();
+    $('#login_page').hide();
+}
 

@@ -14,39 +14,35 @@ import {
     isScrolledIntoView,
     maxID,
     unifyIDNumbers,
-    sortTableData
+    sortTableData,
+    showLogin,
+    showToDo
 } from './utilities.js';
 
+
+
 $(document).ready(function () {
-    debugger;
     if (localDataStorage.get('user')) {
-        debugger;
-        $('#todo_page').show();
-        $('#login_page').hide();
+        showToDo();
     } else {
-        $('#todo_page').hide();
-        $('#login_page').show();
+        showLogin();
     }
 
     $('#logoutBtn').click(function () {
         localDataStorage.remove('user');
-        $('#todo_page').hide();
-        $('#login_page').show();
+        showLogin();
     });
 
 
     $('#loginBtn').click(function () {
-        debugger;
         if ($('#email').val() == credentials.email && $('#pwd').val() == credentials.password) {
-            $('#todo_page').show();
-            $('#login_page').hide();
+            showToDo();
             localDataStorage.set('user', credentials.email);
         }
     });
 
 
     loadDataM.done(function (data, status) {
-        debugger;
         console.log("second call from todo1.js");
         var getLocalData = localDataStorage.get('localData');
         var gWay = 'asc';
@@ -160,13 +156,11 @@ $(document).ready(function () {
         });
 
         $("#login_page_btn").click(function () {
-            $('#todo_page').hide();
-            $('#login_page').show();
+            showLogin();
         });
 
         $("#todo_page_btn").click(function () {
-            $('#todo_page').show();
-            $('#login_page').hide();
+            showToDo();
         });
 
 
