@@ -9,7 +9,6 @@ $.ajax({
     async: false,
     dataType: 'json',
     success: function (response) {
-    debugger; 
     }
   });
 
@@ -27,7 +26,6 @@ export var loadDataM = $.getJSON('data.json', function(data, status) {
     }    
     console.log('First call from source.js');
     tableData.push(...data);
-    debugger;
     // localStorage.setItem('localData', tableData);
     localDataStorage.set('localData', tableData);
  });

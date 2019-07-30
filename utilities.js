@@ -4,7 +4,7 @@
  * @param {number} id - id of a row in the data table
  * @param {object} inTable - input table
  */
-export function deleteItem(id,inTable) {
+export function deleteItem(id, inTable) {
 
     for (var i = 0; i < inTable.length; i++) {
         if (inTable[i]["id"] == id) {
@@ -18,7 +18,7 @@ export function deleteItem(id,inTable) {
  * @param {id}
  * filters id and related text field based on the input in the filter field
  */
-export function triggerChange(id,inTable) {
+export function triggerChange(id, inTable) {
 
     console.log("trigger element by id ", id);
     var filterItem = $("#" + id).val().trim().replace(/\s\s+/g, ' ');
@@ -75,7 +75,7 @@ function pasteFunction(event) {
 
     console.log("pasted");
     setTimeout(function () {
-        triggerChange(event.id,tableData);
+        triggerChange(event.id, tableData);
     }, 0);
 }
 
@@ -136,7 +136,7 @@ export function getChecked() {
  * @param {object} inTable - input table 
  */
 export function editItem(id, newValTitle, inTable) {
-   
+
     for (var i = 0; i < inTable.length; i++) {
         if (inTable[i]["id"] == id) {
             inTable[i]["title"] = newValTitle;
@@ -257,5 +257,15 @@ export function sortTableData(data, field, way) {
         }
 
     }
-};
+}
+
+export function showLogin() {
+    $('#todo_page').hide();
+    $('#login_page').show();
+}
+
+export function showToDo() {
+    $('#todo_page').show();
+    $('#login_page').hide();
+}
 
