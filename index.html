@@ -16,25 +16,56 @@
 </head>
 
 <body class="main-body">
-    <!-- <div>
-        <button type="button" id="login_page_btn" class="btn btn-primary btn-sm">Login Page</button>
-        <button type="button" id="todo_page_btn" class="btn btn-primary btn-sm"> Todo Page</button>
-    </div> -->
-    <div id="login_page">
-        <p id="div1">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="email" style="color: white">Email address:</label>
-                    <input type="email" class="form-control" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="pwd" style="color: white">Password:</label>
-                    <input type="password" class="form-control" id="pwd">
-                </div>
-                <button type="button" class="btn btn-default" id="loginBtn">Login</button>
-            </form>
-        </p>
+    <!-- <div> -->
+    <!-- <button type="button" id="login_page_btn" class="btn btn-primary btn-sm">Login Page</button> -->
+    <!-- <button type="button" id="todo_page_btn" class="btn btn-primary btn-sm"> Todo Page</button> -->
+    <!-- </div> -->
 
+    <div id="login_page">
+        <div class="container top-container"></div>
+        <div class="container lower-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="login_page_title" class="text-center">
+                        <h2>Login Page</h2>
+                    </div>
+                    <div id="login-form">
+                        <form class="form">
+                            <div class="form-group">
+                                <label for="email">Email address:</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Password:</label>
+                                <input type="password" class="form-control" id="pwd">
+                            </div>
+                            <div class="custom-top-bottom-m">
+                                <button type="button" class="btn btn-default" id="loginBtn">Login</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" aria-hidden="true" id="alertLogin">&times;</button>
+                        <strong>Warning!</strong> Please use correct credentials
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="custom-top-bottom-m">
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" aria-hidden="true" id="alertLogin">&times;</button>
+                            <strong>Warning!</strong> Please use correct credentials
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="todo_page">
