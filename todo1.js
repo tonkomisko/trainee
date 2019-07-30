@@ -14,32 +14,30 @@ import {
     isScrolledIntoView,
     maxID,
     unifyIDNumbers,
-    sortTableData
+    sortTableData,
+    showTodoPage,
+    showLoginPage
 } from './utilities.js';
 
 $(document).ready(function () {
     debugger;
     if (localDataStorage.get('user')) {
         debugger;
-        $('#todo_page').show();
-        $('#login_page').hide();
+        showTodoPage();
     } else {
-        $('#todo_page').hide();
-        $('#login_page').show();
+        showLoginPage();
     }
 
     $('#logoutBtn').click(function () {
         localDataStorage.remove('user');
-        $('#todo_page').hide();
-        $('#login_page').show();
+        showLoginPage();
     });
 
 
     $('#loginBtn').click(function () {
         debugger;
         if ($('#email').val() == credentials.email && $('#pwd').val() == credentials.password) {
-            $('#todo_page').show();
-            $('#login_page').hide();
+            showTodoPage();
             localDataStorage.set('user', credentials.email);
         }
     });

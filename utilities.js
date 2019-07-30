@@ -259,3 +259,21 @@ export function sortTableData(data, field, way) {
     }
 };
 
+
+/**
+ * @function showTodoPage
+ */
+
+ export function showTodoPage(){
+    $('#todo_page').show();
+    $('#login_page').hide();
+ }
+
+ /**
+ * @function showLoginPage
+ */
+
+export function showLoginPage(){
+    $('#todo_page').hide();
+    $('#login_page').show();
+ }
