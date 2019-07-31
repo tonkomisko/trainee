@@ -4,17 +4,17 @@ import {localDataStorage} from './localDataStorage.js';
  Initial data definition into todo list
  @var {tableData}
 */
-$.ajax({
-    url: 'data.json',
-    async: false,
-    dataType: 'json',
-    success: function (response) {
-    }
-  });
+// $.ajax({
+//     url: 'data.json',
+//     async: false,
+//     dataType: 'json',
+//     success: function (response) {
+//     }
+//   });
 
 export const tableData = [{ "id": "21", "title": "Janko Hrasko", "action": "Delete", "actionTwo": "Edit" }];
 
-export var loadDataM = $.getJSON('data.json', function(data, status) {
+export var loadDataM = $.getJSON('https://raw.githubusercontent.com/tonkomisko/trainee/tono_todo1/data.json', function(data, status) {
     if (status == "success"){
         console.log('status success');
     }else if (status == "timeout"){
