@@ -22,6 +22,7 @@ import {
 
 
 $(document).ready(function () {
+    $('.alert').hide();
     if (localDataStorage.get('user')) {
         showToDo();
     } else {
