@@ -1,3 +1,4 @@
+//pulls and stores data
 // import {$,jQuery} from 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js';
 import {localDataStorage} from './localDataStorage.js';
 /** 
@@ -30,6 +31,8 @@ export var loadDataM = $.getJSON('https://raw.githubusercontent.com/tonkomisko/t
     localDataStorage.set('localData', tableData);
  });
 
+
+ export var storeDataM = 
 // export var jqxhr = $.getJSON( "data.json", function() {
 //     console.log( "success" );
 //   })
