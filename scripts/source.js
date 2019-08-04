@@ -32,7 +32,7 @@ export var loadDataM = $.getJSON('https://raw.githubusercontent.com/tonkomisko/t
  });
 
 
- export var storeDataM = 
+//  export var storeDataM = 
 // export var jqxhr = $.getJSON( "data.json", function() {
 //     console.log( "success" );
 //   })

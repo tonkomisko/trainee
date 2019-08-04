@@ -1,5 +1,5 @@
 import { tableData, loadDataM } from './source.js';
-import { credentials } from './credentials.js';
+import { credentials } from '../data/credentials.js';
 import { localDataStorage } from './localDataStorage.js';
 import {
     triggerChange,
